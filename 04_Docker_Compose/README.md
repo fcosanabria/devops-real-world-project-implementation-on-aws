@@ -7,34 +7,39 @@ We’ll use `docker-compose.yaml` to define 10 interdependent services including
 ---
 
 ## Docker Concepts Covered
-- Do You Want to Know What Docker Concepts Power 
-This Real-World Retail Store Microservices Application?
+
+- Do You Want to Know What Docker Concepts Power
+  This Real-World Retail Store Microservices Application?
 
 ![Docker Concepts Covered](../images/02-00-Docker-Concepts-Covered.png)
-
 
 ---
 
 ## Step-01: What is Docker Compose?
+
 Docker Compose is a tool for:
+
 - Defining **multi-container apps** in a single YAML file
 - Managing **networks, volumes, dependencies**
 - Running all services with **`docker compose up`**
 - Testing, tearing down, and rebuilding environments **easily**
 
 ### Docker Compose File Review
+
 - [Retail Store Application - Docker Compose File](https://github.com/aws-containers/retail-store-sample-app/releases/download/v1.3.0/docker-compose.yaml)
 - [Retail Store Application - Docker Compose File - Local Copy](./docker-compose.yaml)
 
 ### Retail Store Application - Architecture Overview
+
 ![Retail Store Sample Application Architecture](../images/04-01-Retail-Store-Architecture-Diagram.png)
 
 ### Problems Without Docker Compose
+
 ![Problems Without Docker Compose](../images/04-02-Why-Docker-Compose.png)
 
 ### How Docker Compose Solves It?
-![How Docker Compose Solves It?](../images/04-03-What-Docker-compose-provides.png)
 
+![How Docker Compose Solves It?](../images/04-03-What-Docker-compose-provides.png)
 
 ---
 
@@ -55,7 +60,7 @@ sudo mv docker-compose /usr/local/lib/docker/cli-plugins/docker-compose
 
 # Verify install
 docker compose version
-````
+```
 
 ---
 
@@ -92,7 +97,7 @@ export DB_PASSWORD='mydbkalyan101'
 # Start all services
 ## Important Note:  if your file name is docker-compose.yaml dont need to specify -f with file
 docker compose -f docker-compose.yaml up
-docker compose up 
+docker compose up
 
 # OR start in detached mode (background)
 docker compose -f docker-compose.yaml up -d
@@ -120,7 +125,7 @@ http://<EC2-Instance-Public-IP>:8888/topology
 ### List Running Services
 
 ```bash
-# List Services 
+# List Services
 docker compose ps
 
 # Also verify Docker images it downloaed
@@ -181,8 +186,8 @@ uname -m
 uname -n
 env
 cat /etc/hostname
-cat /etc/os-release 
-cat /etc/os-release | sed -n '1,6p' 
+cat /etc/os-release
+cat /etc/os-release | sed -n '1,6p'
 curl http://localhost:8080
 curl http://localhost:8080/topology
 curl http://localhost:8080/actuator/health
@@ -192,10 +197,11 @@ exit
 ---
 
 ## Step-09: Docker Compose Stats
+
 Display a live stream of container(s) resource usage statistics
 
 ```bash
-# Stats 
+# Stats
 docker compose stats
 
 # Specific Containers
@@ -205,6 +211,7 @@ docker compose stats ui
 ---
 
 ## Step-10: Display the running process in a container
+
 ```bash
 # Display the running process of all service containers
 docker compose top
@@ -217,14 +224,17 @@ docker compose top checkout
 ---
 
 ## Step-11: UI App: Make changes to Docker Compose and Deploy
-### Step-11-01: UI Service -  Documentation Review
+
+### Step-11-01: UI Service - Documentation Review
+
 - [Reference: UI App Documentation](https://github.com/aws-containers/retail-store-sample-app/tree/main/src/ui)
 - Primarily review the [section: Configuration](https://github.com/aws-containers/retail-store-sample-app/tree/main/src/ui#configuration)
 - We are going to update the `RETAIL_UI_THEME` to `green`
 
 ### Step-11-02: Environment Varibles: Verify UI Service Container before changes
+
 ```bash
-# Connect to UI Container 
+# Connect to UI Container
 docker compose exec ui sh
 
 # Verify Environment Variables in UI Container
@@ -235,20 +245,23 @@ exit
 ```
 
 ### Step-11-03: UI Service - Add RETAIL_UI_THEME to green
+
 - Review the last item in `environment`
+
 ```yaml
 # Upate Docker Compose UI Service
-    environment:
-      - JAVA_OPTS=-XX:MaxRAMPercentage=75.0 -Djava.security.egd=file:/dev/urandom
-      - SERVER_TOMCAT_ACCESSLOG_ENABLED=true
-      - RETAIL_UI_ENDPOINTS_CATALOG=http://catalog:8080
-      - RETAIL_UI_ENDPOINTS_CARTS=http://carts:8080
-      - RETAIL_UI_ENDPOINTS_ORDERS=http://orders:8080
-      - RETAIL_UI_ENDPOINTS_CHECKOUT=http://checkout:8080
-      - RETAIL_UI_THEME=green
+environment:
+  - JAVA_OPTS=-XX:MaxRAMPercentage=75.0 -Djava.security.egd=file:/dev/urandom
+  - SERVER_TOMCAT_ACCESSLOG_ENABLED=true
+  - RETAIL_UI_ENDPOINTS_CATALOG=http://catalog:8080
+  - RETAIL_UI_ENDPOINTS_CARTS=http://carts:8080
+  - RETAIL_UI_ENDPOINTS_ORDERS=http://orders:8080
+  - RETAIL_UI_ENDPOINTS_CHECKOUT=http://checkout:8080
+  - RETAIL_UI_THEME=green
 ```
 
 ### Step-11-04: Force recreate UI Container
+
 ```bash
 # Stop All Services
 docker compose up -d --force-recreate ui
@@ -256,15 +269,16 @@ docker compose up -d --force-recreate ui
 [or]
 
 # Stop All Services
-docker compose down 
+docker compose down
 
 # Start All Services
 docker compose up -d
 ```
 
 ### Step-11-05: Environment Varibles: Verify UI Service Container after changes
+
 ```bash
-# Connect to UI Container 
+# Connect to UI Container
 docker compose exec ui sh
 
 # Verify Environment Variables in UI Container
@@ -278,13 +292,14 @@ RETAIL_UI_ENDPOINTS_CHECKOUT=http://checkout:8080
 RETAIL_UI_THEME=green
 RETAIL_UI_ENDPOINTS_ORDERS=http://orders:8080
 RETAIL_UI_ENDPOINTS_CATALOG=http://catalog:8080
-sh-5.2$  
+sh-5.2$
 
 # Exit from UI Container
 exit
 ```
 
 ### Step-11-06: Access Application and Verify
+
 ```bash
 # Access Application
 http://<EC2-Public-IP>:8888
@@ -294,6 +309,7 @@ We should see green color screens on App
 ```
 
 ### Step-11-07: Assignment
+
 - Please do the same steps for `RETAIL_UI_THEME=orange`
 
 ---
@@ -320,8 +336,8 @@ docker images
 
 ---
 
-
 ## Additional Reference
-Retail Store Sample App GitHub:
-- [https://github.com/aws-containers/retail-store-sample-app](https://github.com/aws-containers/retail-store-sample-app)
 
+Retail Store Sample App GitHub:
+
+- [https://github.com/aws-containers/retail-store-sample-app](https://github.com/aws-containers/retail-store-sample-app)
