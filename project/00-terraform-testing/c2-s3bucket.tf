@@ -11,8 +11,10 @@ resource "random_string" "suffix" {
 resource "aws_s3_bucket" "demo_bucket" {
   bucket = "devopsdemo-${random_string.suffix.result}"
 
-  tags = {
+  tags = { # user defined tags in properties, in the AWS console
     Name        = "DevOps Demo Bucket"
     Environment = "Dev"
+    Owner = "Francisco Sanabria"
+    Organization = "xorganization"
   }
 }

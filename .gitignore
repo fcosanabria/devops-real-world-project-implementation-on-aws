@@ -326,3 +326,8 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+/.idea/devops-real-world-project-implementation-on-aws.iml
+/.idea/modules.xml
+/.idea/prettier.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/vcs.xml

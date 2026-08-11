@@ -24,8 +24,11 @@ A **Deployment** in Kubernetes:
 * Ensures the desired number of Pods are always running
 * Automatically replaces unhealthy Pods via its ReplicaSet
 * Supports **rolling updates** for version upgrades
+  * Esto permite zero downtime. Por que esto permite el self-healing.
 * Allows **easy rollback** to previous versions
 * Provides **horizontal scaling** with a single command
+  * El motivo de esto es por que le permite al deployment escalar horizontalmente sin necesidad de modificar el manifest y usar solamente los metrics de CPU y memoria. Custom metrics tambien. 
+  * En el API referenche de Kubernetes se menciona que "It's recommended that users create Pods only through a Controller, and not directly. See Deployment, Job or StatefulSet".
 
 **Flow:**
 `Deployment` → manages → `ReplicaSet` → creates → `Pods`
@@ -311,4 +314,3 @@ kubectl delete deployment catalog
 | **Security Context** | Enforces least privilege and non-root execution       |
 
 ---
-
