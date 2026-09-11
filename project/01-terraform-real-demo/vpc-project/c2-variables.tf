@@ -5,7 +5,7 @@ variable "aws_region" {
 }
 
 variable "environment_name" {
-  description = "Environment "
+  description = "Environment"
   type = string
   default = "dev"
 }
@@ -25,7 +25,8 @@ variable "tags" {
 }
 
 variable "subnet_newbits" {
-  description = "Number of new bits to add to VPC CIDR to generate subnets (eg: 8 means /24 from ...)"
+  description = "Number of new bits to add to VPC CIDR to generate subnets (eg: 8 means /24 from )"
+  # it tells Terraform how to split the VPC CIDR block.
   type = number
   default = 8
 }
