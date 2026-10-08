@@ -5,9 +5,9 @@ resource "aws_vpc" "main" {
   enable_dns_hostnames = true
   enable_dns_support = true
   tags = merge(var.tags, { Name = "${var.environment_name}-vpc" })
-  lifecycle {
-    prevent_destroy = true # el motivo de esto es por que el VPC es el elemento key de nuestra infra.
-  } # https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle - manejar el comportamiento de la infra.
+  # lifecycle {
+  #   prevent_destroy = true # el motivo de esto es por que el VPC es el elemento key de nuestra infra.
+  # } # https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle - manejar el comportamiento de la infra.
 }
 # 02-Internet Gateway
 resource "aws_internet_gateway" "igw" {
@@ -45,7 +45,7 @@ resource "aws_eip" "nat" {
 
 resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.nat.id
-  subnet_id     = values(aws_subnet.public[0].id) # here we are looking for the first value
+  subnet_id     = values(aws_subnet.public)[0].id# here we are looking for the first value
   depends_on = [aws_internet_gateway.igw]
   tags = merge(var.tags, { Name = "${var.environment_name}-nat" })
 }
