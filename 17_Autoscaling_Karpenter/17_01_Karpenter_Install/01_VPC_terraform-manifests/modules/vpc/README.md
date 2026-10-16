@@ -26,7 +26,7 @@
 | File                        | Purpose |
 |-----------------------------|---------|
 | `main.tf`                   | Core resources: VPC, subnets, NAT gateway, routes |
-| `variables.tf`              | Input variables for customization |
+| `02-variables.tf`              | Input variables for customization |
 | `outputs.tf`                | Output values to expose module data |
 | `datasources-and-locals.tf` | AZ lookups and subnet CIDR logic |
 | `README.md`                 | Module usage and documentation |

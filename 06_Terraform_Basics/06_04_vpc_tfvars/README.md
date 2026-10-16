@@ -51,7 +51,7 @@ terraform plan
 - The `terraform.tfvars` file is where we define input variable values for our Terraform configuration.
 - Instead of hardcoding values directly inside `.tf files`, we keep them here making our setup reusable, flexible, and environment-specific.
 - The `terraform.tfvars` file is automatically loaded by Terraform if present in the working directory.
-- It overrides defaults defined in `variables.tf`
+- It overrides defaults defined in `02-variables.tf`
 - `terraform.tfvars` can be overridden by:
   - `*.auto.tfvars` files
   - CLI arguments (-var, -var-file)
@@ -100,7 +100,7 @@ terraform plan -var-file=prod.tfvars
 ```
 ### Observation
 1. Values from `prod.tfvars` override:
-  - Defaults in `variables.tf`
+  - Defaults in `02-variables.tf`
   - Values from `environment variables (TF_VAR_*)`
   - `terraform.tfvars` and `*.auto.tfvars` files
 2. `-var-file` is one of the highest-precedence sources, second only to `-var` defined directly on the command line.
@@ -114,7 +114,7 @@ terraform plan -var="aws_region=us-east-2"
 ### Observation
 1. The value for `aws_region` is taken directly from the CLI argument.
 2. `-var` has the highest precedence in Terraform, so it overrides:
-  - Defaults in `variables.tf`
+  - Defaults in `02-variables.tf`
   - Environment variables (TF_VAR_*)
   - `terraform.tfvars` and `*.auto.tfvars`
   - Any `-var-file` values
