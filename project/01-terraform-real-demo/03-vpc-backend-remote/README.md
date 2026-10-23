@@ -1,1 +1,0 @@
-This project is a demonstration of how to set up a VPC backend for Terraform using remote state management. It provides a step-by-step guide to create a VPC in AWS and configure Terraform to use a remote backend for storing state files securely. Check 02-vpc-remote-backend for the complete setup instructions and code examples.

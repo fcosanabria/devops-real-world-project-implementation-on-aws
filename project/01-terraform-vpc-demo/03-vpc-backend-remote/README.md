@@ -1,0 +1,3 @@
+This project is a demonstration of how to set up a VPC backend for Terraform using remote state management. It provides a step-by-step guide to create a VPC in AWS and configure Terraform to use a remote backend for storing state files securely. Check 02-vpc-remote-backend for the complete setup instructions and code examples.
+
+Incluso cuando se corre el terraform plan, en el s3 se puede observar que el tflock se crea y se actualiza. Previniendo que múltiples usuarios puedan modificar el estado al mismo tiempo, lo cual es crucial para mantener la integridad del estado de Terraform en entornos colaborativos.
